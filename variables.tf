@@ -24,6 +24,10 @@ variable "my_keypair" {
   default = "aws_keypair"
 }
 
+variable "bastion_sg" {
+  description = "name of the security group id from aws bastion host"
+  type        = string
+}
 
 variable "number_of_instances" {
   description = "Amount of instances for my subnets"

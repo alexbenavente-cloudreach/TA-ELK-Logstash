@@ -6,7 +6,7 @@ resource "aws_instance" "logstash" {
   key_name               = var.my_keypair
   #count                  = var.number_of_instances
   tags = {
-    Name = "Logstash_server"   #_${count.index + 1}"
+    Name = "Logstash_server" #_${count.index + 1}"
   }
 }
 
@@ -18,7 +18,7 @@ resource "aws_volume_attachment" "ebs_attch" {
 }
 
 resource "aws_ebs_volume" "ebs_logstash" {
-#  most_recent = true
+  #  most_recent = true
   availability_zone = "us-east-1a"
   size              = 50
 

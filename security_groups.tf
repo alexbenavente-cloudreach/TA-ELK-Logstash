@@ -1,11 +1,14 @@
 resource "aws_security_group" "logstash_sg" {
   vpc_id = data.aws_vpc.main_vpc.id
+
+  #INBOUND CONNECTIONS 
   ingress {
-    description = "ingress rules"
-    cidr_blocks = ["0.0.0.0/0"]
-    from_port   = 22
-    protocol    = "tcp"
-    to_port     = 22
+    description     = "ingress rules"
+    security_groups = ["sg-037583cd48f4cd97d"]
+    #cidr_blocks = ["192.168.0.0/16"]
+    from_port = 22
+    protocol  = "tcp"
+    to_port   = 22
   }
   ingress {
     description = "ingress rules"
@@ -14,6 +17,8 @@ resource "aws_security_group" "logstash_sg" {
     protocol    = "tcp"
     to_port     = 5044
   }
+
+  #OUTBOUND CONNECTIONS 
   egress {
     description = "egress rules"
     cidr_blocks = ["0.0.0.0/0"]

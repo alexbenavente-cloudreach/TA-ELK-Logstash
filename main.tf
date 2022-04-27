@@ -26,3 +26,11 @@ data "aws_subnet" "private" {
     values = [var.log_subnet_name]
   }
 }
+
+# DATA SOURCE FOR BASTION HOST SECURITY GROUP
+data "aws_security_group" "bastion_host_sg" {
+  filter {
+    name   = "tag:Name"
+    values = [var.bastion_sg]
+  }
+}
