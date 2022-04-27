@@ -1,0 +1,42 @@
+name: Terraform Actions
+
+on: 
+  push:
+    branches:
+      - "main"
+
+jobs:
+    Terraform-Fmt-Validate:
+        runs-on: ubuntu-latest
+        permissions:
+          packages: write
+          contents: read
+          id-token: write
+        
+        steps:
+          - run: echo "GitHub Actions TF"
+
+          - name: Checkout
+            uses: actions/checkout@v3
+          
+          - name: AWS Authentication
+            uses: aws-actions/configure-aws-credentials@v1
+            with:
+              role-to-assume: arn:aws:iam::254964228601:role/elk1-github-oidc
+              aws-region: us-east-1
+              role-session-name: GitHubActionsTF
+
+          - name: Setup Terraform
+            uses: hashicorp/setup-terraform@v1
+
+          - name: Terraform Init
+            run: terraform init
+          
+          - name: Terraform Format
+            run: terraform fmt -check
+
+          - name: Terraform Validate
+            run: terraform validate  
+
+          - name: Terraform Plan
+            run: terraform plan
