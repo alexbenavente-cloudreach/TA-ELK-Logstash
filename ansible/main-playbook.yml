@@ -22,9 +22,9 @@
       name: openjdk-11-jdk
       state: present
 
-  - name: Transport Http for Logstash
+  - name: Transport Https for Logstash
     apt:
-      name: transport http
+      name: apt-transport-https
       state: present
 
 
