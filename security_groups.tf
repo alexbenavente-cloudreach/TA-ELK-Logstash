@@ -12,6 +12,7 @@ resource "aws_security_group" "logstash_sg" {
   }
   ingress {
     description = "ingress rules"
+    #security_groups = ["sg-037583cd48f4cd97d"]
     cidr_blocks = ["0.0.0.0/0"]
     from_port   = 5043
     protocol    = "tcp"

@@ -3,19 +3,19 @@
   become: true
   tasks:  
 
-#adding the Elasticsearch package as test to make sure Logstach will run
-  - name: Adding Elasticsearch PGP Key
-    shell: |
-      wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
-    args:
-        warn: no
+# #adding the Elasticsearch package as test to make sure Logstach will run
+#   - name: Adding Elasticsearch PGP Key
+#     shell: |
+#       wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
+#     args:
+#         warn: no
 
-#Adding as well elastic serach repository for testing purposes
-  - name: Adding Elasticsearch repository
-    copy:
-      dest: /etc/apt/sources.list.d/elastic-7.x.list
-      content: |
-        deb https://artifacts.elastic.co/packages/7.x/apt stable main
+# #Adding as well elastic serach repository for testing purposes
+#   - name: Adding Elasticsearch repository
+#     copy:
+#       dest: /etc/apt/sources.list.d/elastic-7.x.list
+#       content: |
+#         deb https://artifacts.elastic.co/packages/7.x/apt stable main
 
   - name: Installing OpenJDK Java
     apt:
@@ -43,6 +43,12 @@
     apt:
       name: logstash
       state: present
+
+# Copying The configuration file for logstash
+  - name: Copy the config file for logstash
+    copy:
+      src: "templates/logstash.conf.j2"
+      dest: "/etc/logstash/logstash.conf"
 
 
 # Enable and start the Elasticsearch service
