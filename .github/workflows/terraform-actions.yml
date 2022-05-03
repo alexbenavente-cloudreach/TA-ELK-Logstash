@@ -3,7 +3,8 @@ name: Terraform Actions
 on: 
   push:
     branches:
-      - "main"
+      - "*"
+      - "!main"
 
 jobs:
     Terraform-Fmt-Validate:
